@@ -81,10 +81,6 @@ MetronicApp.controller('EnergyController', function($scope, $http, $timeout, Dat
 MetronicApp.controller('ExtraMazoutController', function($scope, $http, $timeout, Data, $window) {
     console.log('ExtraMazoutController');
 
-    $scope.user = {
-        name: 'awesome user'
-    };
-
     console.log($window.opener.Mazout);
     $scope.person = $window.opener.Mazout.person;
     $scope.requestMz = $window.opener.Mazout.requestMz;
@@ -99,6 +95,32 @@ MetronicApp.controller('ExtraMazoutController', function($scope, $http, $timeout
         $scope.previousPayments = data;
         console.log(data);
     });
+
+    $scope.updateMember = function(){
+        $scope.totalResource = 0;
+        $scope.totalThresholdsRessource = 0;
+
+        var nbrMember = 0;
+        var data = $scope.memberFamily;
+        for (var key in data) {
+            if(data.hasOwnProperty(key)){
+                nbrMember++;
+                var obj = data[key];
+                for (var prop in obj) {
+                    if(obj.hasOwnProperty(prop)){
+                        if(prop == 'resource'){
+                            console.log(prop + " = " + obj[prop]);
+                            $scope.totalResource =  $scope.totalResource + parseFloat(obj[prop]);
+                        }
+                    }
+                }
+            }
+        }
+        $scope.totalThresholdsRessource = 17303.80 + ((nbrMember-1) * 3120);
+        console.log("$scope.totalRessource  : ");
+        console.log($scope.totalRessource);
+
+    };
 
     $scope.categoryDescription = [
         "Statut BIM",
