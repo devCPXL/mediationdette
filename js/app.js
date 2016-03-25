@@ -252,7 +252,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('RapportJournalierExtra', {
             url: "/energie/RapportJournalier/extra",
             templateUrl: "views/energie/extra_rapportJournalier.html",
-            data: {pageTitle: 'ALLOCATION MAZOUT :', pageSubTitle: 'FONDS MAZOUT'},
+            data: {pageTitle: 'ALLOCATION MAZOUT :', pageSubTitle: 'RAPPORT JOURNALIER'},
             controller: "ExtraRapportJournalierController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {

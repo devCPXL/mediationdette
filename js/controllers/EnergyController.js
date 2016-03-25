@@ -147,10 +147,15 @@ MetronicApp.controller('ExtraRapportJournalierController', function($scope, $htt
     });
 
     $scope.categoryDescription = [
-        "Statut BIM",
+        "Statut BIM. Nous sommes donc dispensés de l'enquête sur les revenus",
         "Personne à bas revenu",
         "Personne surendettée (Médiation de dettes)",
         "Personne à revenu modeste"
+    ];
+
+    $scope.genrePersonne = [
+        "Monsieur",
+        "Madame"
     ];
 
 });
