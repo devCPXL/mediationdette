@@ -55,6 +55,7 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
 $app->get('/listMazout/', function ($request, $response, $args) {
     global $database;
 
+//join between the person and the Mazout folder
     $data = $database->query1("
         select distinct
           dos.dos_soc_dos,
@@ -68,7 +69,11 @@ $app->get('/listMazout/', function ($request, $response, $args) {
           dos.dos_huisnr,
           dos.dos_busnr,
           dos.dos_postcode,
-          dos.dos_woonplaats
+          dos.dos_woonplaats,
+          dos.dos_tel,
+          dos.dos_tel2,
+          dos.dos_gsm,
+          dos.dos_geslacht
         from dossier dos
           inner join SocMaz maz
               on dos.dos_jaar = maz.socm_dosjaar
