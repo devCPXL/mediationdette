@@ -1,6 +1,6 @@
 <!-- BEGIN PAGE CONTENT-->
 <!--<p>-->
-	<!--{{person}}-->
+	{{person}}
 	<!--{{requestMz}}-->
 <!--</p>-->
 <div class="portlet light" id="section-to-print">
@@ -13,155 +13,63 @@
 					<span>CELLULE ENERGIE</span>
 				</div>
 				<div class="col-xs-7">
-					<p> OCTROI ALLOCATION MAZOUT <span class="muted"> RAPPORT JOURNALIER </span> </p>
+					<h3> RAPPORT JOURNALIER <span class="muted"> {{requestMz.socm_datum_onderzoek}} </span> </h3>
 				</div>
 			</div>
-			<hr style="width: 750px;" />
+			<hr/>
 			<div class="row">
-				<h3>RAPPORT JOURNALIER __ TEST MED
-				</h3>
+				<!--<h3>RAPPORT JOURNALIER {{requestMz.socm_datum_onderzoek}}
+				</h3>-->
 				<div class="col-xs-6">
-					<h3>Client:</h3>
+					<!--<h3>Client:</h3>-->
 					<ul class="list-unstyled">
 						<li>
-							<strong>{{person.dos_naam +' '+ person.dos_voornaam}}</strong>
+							N° Dossier :  <span><strong>{{person.dos_soc_dos +' - DI : '+ person.dos_jaar +' / '+ person.dos_number }}</strong></span>
 						</li>
 						<li>
+							NOM : {{person.dos_naam +' '+ person.dos_voornaam}}
+						</li>
+						<!--<li>
 							 NISS : {{person.dos_nr_nat_reg}}
+						</li>-->
+						<li>
+							Adresse : {{person.dos_straat +' '+person.dos_huisnr + '/' + person.dos_busnr}}
 						</li>
 						<li>
-							{{person.dos_straat +' '+person.dos_huisnr + '/' + person.dos_busnr}}
+							{{person.dos_postcode + ' ' + person.dos_woonplaats }} - Belgique
 						</li>
 						<li>
-							{{person.dos_postcode + ' ' + person.dos_woonplaats }}
+							{{person.dos_tel + ' ' + person.dos_tel2 + ' ' + person.dos_gsm}}
 						</li>
 						<li>
-							 Belgique
+							{{person.dos_geslacht}}
 						</li>
 					</ul>
 				</div>
 
 				<div class="col-xs-6 invoice-payment">
-					<h3>Dossier info:</h3>
-					<ul class="list-unstyled">
-						<li>
-							<strong>Période de chauffe:</strong> {{requestMz.socm_seizoen_van}}
-						</li>
 
-						<li>
-							<strong>N° Dossier : </strong> <span>{{person.dos_soc_dos +' - DI : '+ person.dos_jaar +' / '+ person.dos_number }}</span>
-						</li>
-						<li>
-							<strong>AS : </strong> Dambrain  M.<!--{{requestMz.socm_login_upd | uppercase}}-->
-						</li>
-						<li>
-							<strong>Date de la demande : </strong> {{requestMz.socm_datum_onderzoek}}
-						</li>
-						<li>
-							<strong>Quantité Mazout:</strong> {{requestMz.socm_kwantiteit}} L
-						</li>
-						<li>
-							<strong>Livré le :</strong> {{requestMz.socm_datum}}
-						</li>
-						<li>
-							<strong>Montant :</strong> {{requestMz.socm_accept_bedrag / 10000}} €
-						</li>
-						<li>
-							<strong>Nombre de logements :</strong> {{requestMz.socm_aant_pers}}
-						</li>
-						<!--<li>-->
-							<!--<strong>Catégorie du demandeur :</strong> {{requestMz.socm_seizoen_tot}}-->
-						<!--</li>-->
-					</ul>
 				</div>
 			</div>
 			<div class="row">
-				<h3>Composition de ménage / Ressources :</h3>
+				<!--<h3>Composition de ménage / Ressources :</h3>-->
 				<div class="col-xs-12">
-					<table class="table table-striped table-hover">
-					<thead>
-					<tr>
-						<th>
-							 NOM
-						</th>
-						<th>
-							 PRENOM
-						</th>
-						<th class="hidden-480">
-							 DATE NAISSANCE
-						</th>
-						<th class="hidden-480">
-							 RESSOURCES
-						</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr ng-repeat="m in memberFamily" id="">
-						<td> {{m.dos_naam}} </td>
-						<td> {{m.dos_voornaam}} </td>
-						<td> {{m.dos_gebdatum}} </td>
-						<td>
-							<a href="#" editable-number="m.resource" e-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" e-step="0.01" >
-								{{m.resource || 'vide' }}
-							</a>
-						</td>
-					</tr>
-					</tbody>
-					</table>
-					<!--<p>{{ memberFamily }}</p>-->
-				</div>
-			</div>
-			<div class="row">
-				<h3>Payements antérieurs via le Fonds Mazout :</h3>
-				<div class="col-xs-12">
-					<table class="table table-striped table-hover">
-						<thead>
-						<tr>
-							<th>
-								ANNEE DECISION
-							</th>
-							<!--<th class="hidden-480">-->
-								<!--TYPE AIDE-->
-							<!--</th>-->
-							<!--<th class="hidden-480">-->
-								<!--DATE DEBUT-->
-							<!--</th>-->
-							<th class="hidden-480">
-								DATE LIVRAISON
-							</th>
-							<th class="hidden-480">
-								MONTANT
-							</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr ng-repeat="pp in previousPayments" id="">
-							<td> {{pp.scpd_bew_jaar}} </td>
-							<!--<td> {{pp.scpd_bes_stncode}} </td>-->
-							<!--<td> {{pp.scpd_debut_per}} </td>-->
-							<td> {{pp.scpd_fin_per}} </td>
-							<td> {{pp.scpd_bet_bedrag}} € </td>
-
-						</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-8">
 					<div class="well">
-
-						<strong>Catécorie du demandeur : </strong><br/>
-						Catécorie {{requestMz.socm_seizoen_tot}} : <strong> {{ categoryDescription[requestMz.socm_seizoen_tot - 1] }} </strong> <br/>
-						<br/>
-						<strong>Montant de l'allocation : </strong><br/>
-						<strong>{{requestMz.socm_accept_bedrag / 10000}} € </strong>
-							à payer en Fonds Mazout sur le <strong>{{previousPayments[0].scpd_IBAN}}</strong>
-							de Madame/Monsieur {{person.dos_naam}}
+					{{ genrePersonne[person.dos_geslacht] }}
+					{{person.dos_geslacht}}
+					<p>
+						L'intéressé(e) se présente à la permanence du {{requestMz.socm_datum_onderzoek}}
+						et sollicite l'allocation de chauffage pour une livraison en date du {{requestMz.socm_datum}}.
+					</p>
+					<p>
+						L'intéressé(e) fait partie de la catégorie {{requestMz.socm_seizoen_tot}} : {{ categoryDescription[requestMz.socm_seizoen_tot - 1] }}
+					</p>
 
 					</div>
 				</div>
-				<div class="col-xs-4">
+			</div>
+			<div class="row">
+				<div class="col-xs-offset-8 col-xs-4">
 					<a class="btn btn-lg blue hidden-print " onclick="javascript:window.print();">
 					Imprimer <i class="fa fa-print"></i>
 					</a>
