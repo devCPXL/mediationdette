@@ -167,19 +167,26 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('fileupload', {
             url: "/file_upload.html",
             templateUrl: "views/file_upload.html",
-            data: {pageTitle: 'AngularJS File Upload', pageSubTitle: 'angularjs file upload'},
-            controller: "GeneralPageController",
+            data: {pageTitle: 'Téléchargement fichiers usager ', pageSubTitle: ' ??? '},
+            controller: "UploadFilesController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load([{
-                        name: 'angularFileUpload',
+                        name: 'ui.select',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
                         files: [
                             'assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload.min.js',
-                        ] 
+
+                            'assets/global/plugins/select2/select2.css',
+                            'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
+
+                            'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',
+                            'assets/global/plugins/select2/select2.min.js'
+                        ]
                     }, {
                         name: 'MetronicApp',
                         files: [
-                            'js/controllers/GeneralPageController.js'
+                            'js/controllers/EnergyController.js'
                         ]
                     }]);
                 }]
