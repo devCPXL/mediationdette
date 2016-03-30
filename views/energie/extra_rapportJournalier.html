@@ -41,9 +41,7 @@
 						<li>
 							{{person.dos_tel + ' ' + person.dos_tel2 + ' ' + person.dos_gsm}}
 						</li>
-						<li>
-							{{person.dos_geslacht}}
-						</li>
+
 					</ul>
 				</div>
 
@@ -55,14 +53,13 @@
 				<!--<h3>Composition de ménage / Ressources :</h3>-->
 				<div class="col-xs-12">
 					<div class="well">
-					{{ genrePersonne[person.dos_geslacht] }}
-					{{person.dos_geslacht}}
+
 					<p>
-						L'intéressé(e) se présente à la permanence du {{requestMz.socm_datum_onderzoek}}
+						{{ genrePersonne[person.dos_geslacht - 1] }} se présente à la permanence du {{requestMz.socm_datum_onderzoek}}
 						et sollicite l'allocation de chauffage pour une livraison en date du {{requestMz.socm_datum}}.
 					</p>
 					<p>
-						L'intéressé(e) fait partie de la catégorie {{requestMz.socm_seizoen_tot}} : {{ categoryDescription[requestMz.socm_seizoen_tot - 1] }}
+						{{ genrePersonne[person.dos_geslacht - 1] }} fait partie de la catégorie {{requestMz.socm_seizoen_tot}} : {{ categoryDescription[requestMz.socm_seizoen_tot - 1] }}
 					</p>
 
 					</div>

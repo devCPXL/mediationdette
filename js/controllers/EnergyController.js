@@ -117,9 +117,9 @@ MetronicApp.controller('ExtraMazoutController', function($scope, $http, $timeout
 
     $scope.categoryDescription = [
         "Statut BIM",
-        "Personne à bas revenu",
+        "Personne à bas revenus",
         "Personne surendettée (Médiation de dettes)",
-        "Personne à revenu modeste"
+        "Personne à revenus modestes"
     ];
 
 });
@@ -147,8 +147,8 @@ MetronicApp.controller('ExtraRapportJournalierController', function($scope, $htt
     });
 
     $scope.categoryDescription = [
-        "Statut BIM. Nous sommes donc dispensés de l'enquête sur les revenus",
-        "Personne à bas revenu",
+        "Statut BIM. Nous sommes donc dispensés de l'enquête sur les revenus.",
+        "Personne à bas revenus. Cela signifie que l'usager dispose de revenus annuels bruts imposables inférieurs à € 17.083,39 majorés de € 3.162,60 par personne à charge.",
         "Personne surendettée (Médiation de dettes)",
         "Personne à revenu modeste"
     ];
