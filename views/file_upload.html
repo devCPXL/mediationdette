@@ -10,14 +10,36 @@
 
 <!-- BEGIN MAIN CONTENT -->
 <div class="note note-success note-bordered">
-	<h3>Angular File Upload</h3>
+	<h3>Liste usagers :</h3>
 	<p>
-		Angular File Upload is a module for the AngularJS framework. Supports drag-n-drop upload, upload progress, validation filters and a file upload queue. It supports native HTML5 uploads, but degrades to a legacy iframe upload method for older browsers. Works with any server side platform which supports standard HTML form uploads.
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit nisi et vehicula hendrerit. Nam at odio aliquet, mollis mauris vitae, facilisis ante. Nulla feugiat placerat elit, eget molestie elit vestibulum id.
 	</p>
-	<p><span class="label label-danger">File upload is disabled in the demo only!</span></p>
-	<p>
-		For more info please check the <a href="https://github.com/nervgh/angular-file-upload">official github page</a>
-	</p>
+	<form class="form-horizontal" role="form">
+		<div class="form-body">
+			<div class="form-group">
+				<label class="col-md-3 control-label">Liste usagers :</label>
+				<div class="col-md-6">
+					<ui-select ng-model="person.selected" theme="bootstrap" ng-change="changePerson(person.selected)">
+						<ui-select-match placeholder="Selectionner ou chercher la personne dans la liste...">
+							{{$select.selected.dos_naam
+							+ ' ' + $select.selected.dos_voornaam
+							+ ' ' + $select.selected.dos_soc_dos
+							+ ' - ' + $select.selected.dos_jaar
+							+ ' / ' + $select.selected.dos_number}}
+						</ui-select-match>
+						<ui-select-choices repeat="person in people | filter: $select.search">
+							<div ng-bind-html="person.dos_naam +' '+ person.dos_voornaam | highlight: $select.search"></div>
+							<small ng-bind-html="person.dos_soc_dos | highlight: $select.search"></small> _
+							<small ng-bind-html="person.dos_jaar | highlight: $select.search"></small> /
+							<small ng-bind-html="person.dos_number | highlight: $select.search"></small> _
+							<small ng-bind-html="person.dos_nr_nat_reg | highlight: $select.search"></small> _
+							<small ng-bind-html="person.dos_gebdatum | highlight: $select.search"></small>
+						</ui-select-choices>
+					</ui-select>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
 
 <div class="row" ng-controller="FileUploadCtrl" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
