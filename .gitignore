@@ -1,3 +1,5 @@
+/demo
+/assets
 # exclude plugins
-/assets/global/plugins/*
+# /assets/global/plugins/*
 .idea/*

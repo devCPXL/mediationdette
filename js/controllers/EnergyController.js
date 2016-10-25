@@ -39,7 +39,7 @@ MetronicApp.filter('propsFilter', function() {
 });
 
 MetronicApp.controller('EnergyController', function($scope, $http, $timeout, Data, $window) {
-    //$scope.personselected = {};
+    $scope.person = {};
     $scope.$on('$viewContentLoaded', function() {
         Metronic.initAjax(); // initialize core components
         TableAdvanced.init();

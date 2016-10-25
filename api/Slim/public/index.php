@@ -47,6 +47,9 @@ $database = new medoo([
     ]
 ]);
 
+// require_once php files
+require_once 'mediationDette.php';
+
 
 $app->get('/hello/{name}', function ($request, $response, $args) {
     return $response->write("Hello " . $args['name']);
@@ -73,14 +76,16 @@ $app->get('/listMazout/', function ($request, $response, $args) {
           dos.dos_tel,
           dos.dos_tel2,
           dos.dos_gsm,
-          dos.dos_geslacht
+          dos.dos_geslacht,
+          dos.dos_nationaliteit,
+          dos.dos_lang,
+          dos.dos_etat_civil,
+          dos.dos_burg_staat
         from dossier dos
           inner join SocMaz maz
               on dos.dos_jaar = maz.socm_dosjaar
                   and dos.dos_number = maz.socm_dosnumber
         ");
-
-
     return $response->withStatus(200)->withHeader('Content-type', 'application/json')->write(json_encode($data));
 });
 

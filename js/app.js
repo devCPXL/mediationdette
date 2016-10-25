@@ -193,6 +193,41 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
 
+
+        // List Dossier Mazout
+        .state('mediation', {
+            url: "/mediation",
+            templateUrl: "views/mediation/filesMediation.html",
+            data: {pageTitle: 'Dossiers Médiation', pageSubTitle: 'de dettes'},
+            controller: "MediationController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load([{
+                        name: 'ui.select',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        files: [
+                            'assets/global/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css',
+                            'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css',
+                            'assets/global/plugins/select2/select2.css',
+                            'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
+                            'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
+
+                            'js/scripts/table-advanced.js',
+                            'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',
+                            'assets/global/plugins/select2/select2.min.js',
+                            'assets/global/plugins/datatables/all.min.js',
+                            'assets/global/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js'
+                        ]
+                    }, {
+                        name: 'MetronicApp',
+                        files: [
+                            'js/controllers/MediationController.js'
+                        ]
+                    }]);
+                }]
+            }
+        })
+
         // List Dossier Mazout
         .state('ListMazout', {
             url: "/energie/ListMazout",
@@ -240,7 +275,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
                             'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
                             'assets/global/plugins/angularjs-xeditable/css/xeditable.css',
-
                             'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',
                             'assets/global/plugins/select2/select2.min.js',
                             'assets/global/plugins/datatables/all.min.js',
