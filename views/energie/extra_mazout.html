@@ -16,7 +16,7 @@
 					<p> OCTROI ALLOCATION MAZOUT <span class="muted"> FONDS MAZOUT </span> </p>
 				</div>
 			</div>
-			<hr style="width: 750px;" />
+			<hr style="width: 750px; margin: 10px;" />
 			<div class="row">
 				<div class="col-xs-6">
 					<h3>Client:</h3>
@@ -31,10 +31,14 @@
 							{{person.dos_straat +' '+person.dos_huisnr + '/' + person.dos_busnr}}
 						</li>
 						<li>
-							{{person.dos_postcode + ' ' + person.dos_woonplaats }}
+							{{person.dos_postcode + ' ' + person.dos_woonplaats }} Belgique
+						</li>
+						<br />
+						<li>
+							<strong>N° Dossier : </strong> <span>{{person.dos_soc_dos }}<strong> DI : </strong> {{ person.dos_jaar +' / '+ person.dos_number }}</span>
 						</li>
 						<li>
-							 Belgique
+							<strong>AS : </strong> Dambrain  M.<!--{{requestMz.socm_login_upd | uppercase}}-->
 						</li>
 					</ul>
 				</div>
@@ -47,16 +51,10 @@
 						</li>
 
 						<li>
-							<strong>N° Dossier : </strong> <span>{{person.dos_soc_dos +' - DI : '+ person.dos_jaar +' / '+ person.dos_number }}</span>
-						</li>
-						<li>
-							<strong>AS : </strong> Dambrain  M.<!--{{requestMz.socm_login_upd | uppercase}}-->
-						</li>
-						<li>
 							<strong>Date de la demande : </strong> {{requestMz.socm_datum_onderzoek}}
 						</li>
 						<li>
-							<strong>Quantité Mazout:</strong> {{requestMz.socm_kwantiteit}} L
+							<strong>Quantité Livré:</strong> {{requestMz.socm_kwantiteit}} L
 						</li>
 						<li>
 							<strong>Livré le :</strong> {{requestMz.socm_datum}}
@@ -99,7 +97,8 @@
 						<td> {{m.dos_voornaam}} </td>
 						<td> {{m.dos_gebdatum}} </td>
 						<td>
-							<a href="#" editable-number="m.resource" e-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" e-step="0.01" >
+							<!--e-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" e-step="0.1"-->
+							<a href="#" editable-text="m.resource" onaftersave="updateMember()" >
 								{{m.resource || 'vide' }}
 							</a>
 						</td>
@@ -107,6 +106,15 @@
 					</tbody>
 					</table>
 					<!--<p>{{ memberFamily }}</p>-->
+				</div>
+				<div class="row">
+					<div class="col-xs-4"></div>
+					<div class="col-xs-4">
+						Seuils d'intervention : {{totalThresholdsRessource}} €
+					</div>
+					<div class="col-xs-4">
+						Total des ressources : {{totalResource}} €
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -149,11 +157,14 @@
 				<div class="col-xs-8">
 					<div class="well">
 
-						<strong>Catécorie du demandeur : </strong><br/>
-						Catécorie {{requestMz.socm_seizoen_tot}} : <strong> {{ categoryDescription[requestMz.socm_seizoen_tot - 1] }} </strong> <br/>
+						<strong>Catécorie du demandeur : </strong>
+						Catécorie {{requestMz.socm_seizoen_tot}} : <strong> {{ categoryDescription[requestMz.socm_seizoen_tot - 1] }} </strong>
 						<br/>
+						<p><strong>Nous sommes disposés de l'enquête sur les revenus</strong></p>
+
 						<strong>Montant de l'allocation : </strong><br/>
-						<strong>{{requestMz.socm_accept_bedrag / 10000}} € </strong>
+						<strong>
+						( 0.14 € * ( {{requestMz.socm_kwantiteit}} L / {{requestMz.socm_aant_pers}} logements  ) = {{requestMz.socm_accept_bedrag / 10000}} € </strong>
 							à payer en Fonds Mazout sur le <strong>{{previousPayments[0].scpd_IBAN}}</strong>
 							de Madame/Monsieur {{person.dos_naam}}
 
@@ -166,6 +177,17 @@
 					<!--<a class="btn btn-lg green hidden-print margin-bottom-5">
 					Submit Your Invoice <i class="fa fa-check"></i>
 					</a>-->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4">
+					<span>Responsable Service</span>
+				</div>
+				<div class="col-xs-4">
+					<span>Décision Commit CSSS</span>
+				</div>
+				<div class="col-xs-4">
+					<span>Validation Payement</span>
 				</div>
 			</div>
 		</div>
