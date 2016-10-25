@@ -3,3 +3,4 @@
 # exclude plugins
 # /assets/global/plugins/*
 .idea/*
+/sass
