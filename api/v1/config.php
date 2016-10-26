@@ -2,10 +2,10 @@
 /**
  * Database configuration
  */
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'root');
-define('DB_HOST', 'cpasxldb');
-define('DB_NAME', 'cpas_dev');
-define('DB_NAME_TEST', 'test');
+define('DB_USERNAME', '');
+define('DB_PASSWORD', '');
+define('DB_HOST', '');
+define('DB_NAME', '');
+define('DB_NAME_TEST', '');
 
 ?>
