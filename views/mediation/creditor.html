@@ -1,0 +1,133 @@
+	<!-- BEGIN CONTENT -->
+
+
+			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+							<h4 class="modal-title">Modal title</h4>
+						</div>
+						<div class="modal-body">
+							 Widget settings form goes here
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn blue">Save changes</button>
+							<button type="button" class="btn default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+				<div class="col-md-12">
+					<form class="form-horizontal form-row-seperated" action="#">
+						<div class="portlet light">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="icon-settings font-green-sharp"></i>
+									<span class="caption-subject font-green-sharp bold uppercase">
+									Gestion Créanciers </span>
+
+								</div>
+
+							</div>
+							<div class="portlet-body">
+								<div class="table-toolbar">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="btn-group">
+												<button id="sample_editable_1_new" class="btn green">
+													Ajouter Créancier <i class="fa fa-plus"></i>
+												</button>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="btn-group pull-right">
+												<button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
+												</button>
+												<ul class="dropdown-menu pull-right">
+													<li>
+														<a href="javascript:;">
+															Print </a>
+													</li>
+													<li>
+														<a href="javascript:;">
+															Save as PDF </a>
+													</li>
+													<li>
+														<a href="javascript:;">
+															Export to Excel </a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+									<thead>
+										<tr>
+											<th>Créancier</th>
+											<th>Adresse</th>
+											<th>Code Postal</th>
+											<th>Commune</th>
+											<th>Titre Adresse</th>
+											<th>Titre Créancier</th>
+											<th>Téléphone</th>
+											<th>Email</th>
+											<td>Edit </td>
+											<td>Delete </td>
+										</tr>
+									</thead>
+									<tbody>
+									<!--<tr ng-repeat="c in creditors">-->
+										<!--<td>{{ c.name_creditor }}</td>-->
+										<!--<td>{{ c.address_creditor }}</td>-->
+										<!--<td>{{ c.common_creditor }}</td>-->
+									<!--</tr>-->
+									</tbody>
+
+									<!--<tfoot>-->
+									<!--<tr>-->
+										<!--<th>Créancier</th>-->
+										<!--<th>Adresse</th>-->
+										<!--<th>Code Postal</th>-->
+										<!--<th>Commune</th>-->
+										<!--<th>Titre Adresse</th>-->
+										<!--<th>Titre Créancier</th>-->
+										<!--<th>Téléphone</th>-->
+										<!--<th>Email</th>-->
+										<!--<th></th>-->
+										<!--<th></th>-->
+									<!--</tr>-->
+									<!--</tfoot>-->
+								</table>
+
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+
+	<!-- END CONTENT -->
+<script>
+	var editor;
+        jQuery(document).ready(function() {
+
+           	Metronic.init(); // init metronic core components
+			Layout.init(); // init current layout
+			Demo.init(); // init demo features
+
+
+//			$('#sample_editable_1_filter input').addClass( "input-large" );
+
+		});
+    </script>

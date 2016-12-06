@@ -7,8 +7,7 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.router", 
     "ui.bootstrap", 
     "oc.lazyLoad",  
-    "ngSanitize",
-    "xeditable"
+    "ngSanitize"
 ]);
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -171,35 +170,93 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             controller: "UploadFilesController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load([{
-                        name: 'ui.select',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
-                        files: [
-                            'assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload.min.js',
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'angularFileUpload',
+                            insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                            files: [
+                                'assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload.min.js'
 
-                            'assets/global/plugins/select2/select2.css',
-                            'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
+                            ]
+                        },
+                        {
+                            name: 'ui.select',
 
-                            'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',
-                            'assets/global/plugins/select2/select2.min.js'
-                        ]
-                    }, {
+                            files: [
+                                'assets/global/plugins/select2/select2.css',
+                                'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
+
+                                'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',
+                                'assets/global/plugins/select2/select2.min.js'
+                            ]
+                        },
+                        {
+                            name: 'MetronicApp',
+                            files: [
+                                'js/controllers/MediationController.js'
+                            ]
+                        }
+                    ]);
+                }]
+            }
+        })
+
+        .state('mediation', {
+            url: "/mediation",
+            templateUrl: "views/mediation/filesMediation.html",
+            data: {pageTitle: 'Dossiers Médiation', pageSubTitle: 'de dettes'},
+            controller: "MediationController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'ui.select',
+                            insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                            files: [
+
+                                'assets/global/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css',
+                                'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css',
+                                'assets/global/plugins/select2/select2.css',
+                                'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
+                                'assets/global/plugins/angularjs/plugins/ui-select/select.min.css',
+
+                                'js/scripts/table-advanced.js',
+                                'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',
+                                'assets/global/plugins/select2/select2.min.js',
+                                'assets/global/plugins/datatables/all.min.js',
+                                'assets/global/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js'
+                            ]
+                        },
+                        {
+                            name: 'xeditable',
+                            insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                            files: [
+                                'assets/global/plugins/angularjs-xeditable/css/xeditable.css',
+                                'assets/global/plugins/angularjs-xeditable/js/xeditable.js'
+                            ]
+                        },
+                        {
+                            name: 'angularFileUpload',
+                            insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                            files: [
+                                'assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload.min.js'
+                            ]
+                        },
+                        {
                         name: 'MetronicApp',
                         files: [
-                            'js/controllers/EnergyController.js'
+                            'js/controllers/MediationController.js'
                         ]
                     }]);
                 }]
             }
         })
 
-
-        // List Dossier Mazout
-        .state('mediation', {
-            url: "/mediation",
-            templateUrl: "views/mediation/filesMediation.html",
-            data: {pageTitle: 'Dossiers Médiation', pageSubTitle: 'de dettes'},
-            controller: "MediationController",
+        .state('creditor', {
+            url: "/creditor",
+            templateUrl: "views/mediation/creditor.html",
+            data: {pageTitle: 'Dossiers CRÉANCIERS', pageSubTitle: '---'},
+            controller: "CreditorController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load([{
@@ -216,18 +273,20 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',
                             'assets/global/plugins/select2/select2.min.js',
                             'assets/global/plugins/datatables/all.min.js',
-                            'assets/global/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js'
+                            //'assets/global/plugins/datatables/media/js/jquery.dataTables.min.js',
+                            //'assets/global/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js',
+                            //'assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js',
+                            'assets/admin/pages/scripts/table-editable.js'
                         ]
                     }, {
                         name: 'MetronicApp',
                         files: [
-                            'js/controllers/MediationController.js'
+                            'js/controllers/CreditorController.js'
                         ]
                     }]);
                 }]
             }
         })
-
         // List Dossier Mazout
         .state('ListMazout', {
             url: "/energie/ListMazout",
@@ -247,7 +306,8 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',
                             'assets/global/plugins/select2/select2.min.js',
                             'assets/global/plugins/datatables/all.min.js',
-                            'js/scripts/table-advanced.js'
+                            'js/scripts/table-advanced.js',
+                            'assets/global/plugins/angularjs-xeditable/js/xeditable.js'
                         ]
                     }, {
                         name: 'MetronicApp',
@@ -278,7 +338,8 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             'assets/global/plugins/angularjs/plugins/ui-select/select.min.js',
                             'assets/global/plugins/select2/select2.min.js',
                             'assets/global/plugins/datatables/all.min.js',
-                            'js/scripts/table-advanced.js'
+                            'js/scripts/table-advanced.js',
+                            'assets/global/plugins/angularjs-xeditable/js/xeditable.js'
                         ]
                     }, {
                         name: 'MetronicApp',
@@ -627,7 +688,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 }]);
 
 /* Init global settings and run the app */
-MetronicApp.run(["$rootScope", "settings", "$state", "editableOptions", function($rootScope, settings, $state, editableOptions) {
+MetronicApp.run(["$rootScope", "settings", "$state", function($rootScope, settings, $state) {
     $rootScope.$state = $state; // state to be accessed from view
-    editableOptions.theme = 'bs3';
+    //editableOptions.theme = 'bs3';
 }]);

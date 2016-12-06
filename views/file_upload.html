@@ -1,46 +1,3 @@
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-	<li>
-		<a href="#">Home</a><i class="fa fa-circle"></i>
-	</li>
-	<li class="active" data-ng-bind="$state.current.data.pageTitle">
-	</li>
-</ul>
-<!-- END PAGE BREADCRUMB -->
-
-<!-- BEGIN MAIN CONTENT -->
-<div class="note note-success note-bordered">
-	<h3>Liste usagers :</h3>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit nisi et vehicula hendrerit. Nam at odio aliquet, mollis mauris vitae, facilisis ante. Nulla feugiat placerat elit, eget molestie elit vestibulum id.
-	</p>
-	<form class="form-horizontal" role="form">
-		<div class="form-body">
-			<div class="form-group">
-				<label class="col-md-3 control-label">Liste usagers :</label>
-				<div class="col-md-6">
-					<ui-select ng-model="person.selected" theme="bootstrap" ng-change="changePerson(person.selected)">
-						<ui-select-match placeholder="Selectionner ou chercher la personne dans la liste...">
-							{{$select.selected.dos_naam
-							+ ' ' + $select.selected.dos_voornaam
-							+ ' ' + $select.selected.dos_soc_dos
-							+ ' - ' + $select.selected.dos_jaar
-							+ ' / ' + $select.selected.dos_number}}
-						</ui-select-match>
-						<ui-select-choices repeat="person in people | filter: $select.search">
-							<div ng-bind-html="person.dos_naam +' '+ person.dos_voornaam | highlight: $select.search"></div>
-							<small ng-bind-html="person.dos_soc_dos | highlight: $select.search"></small> _
-							<small ng-bind-html="person.dos_jaar | highlight: $select.search"></small> /
-							<small ng-bind-html="person.dos_number | highlight: $select.search"></small> _
-							<small ng-bind-html="person.dos_nr_nat_reg | highlight: $select.search"></small> _
-							<small ng-bind-html="person.dos_gebdatum | highlight: $select.search"></small>
-						</ui-select-choices>
-					</ui-select>
-				</div>
-			</div>
-		</div>
-	</form>
-</div>
 
 <div class="row" ng-controller="FileUploadCtrl" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
 	<div class="col-md-4">
@@ -49,7 +6,7 @@
 			<div class="portlet-title">
 				<div class="caption font-green-sharp">
 					<i class="icon-settings font-green-sharp"></i>
-					<span class="caption-subject bold uppercase">Select files</span>
+					<span class="caption-subject bold uppercase">Selection Fichiers</span>
 					<span class="caption-helper hide"></span>
 				</div>
 				<div class="actions">
@@ -65,14 +22,14 @@
 				<div ng-show="uploader.isHTML5">
 					<!-- 3. nv-file-over uploader="link" over-class="className" -->
 					<div class="file-drop-zone margin-bottom-20" nv-file-over="" uploader="uploader" over-class="file-drop-zone-over">
-						Base drop zone
+						Glissez – déposez vos fichiers dans la </br > « zone de drop »
 					</div>
 					<!-- Example: nv-file-drop="" uploader="{Object}" options="{Object}" filters="{String}" -->
-					<div nv-file-drop="" uploader="uploader" options="{ url: '/foo' }">
-						<div nv-file-over="" uploader="uploader" over-class="file-drop-zone-over" class="file-drop-zone margin-bottom-20">
-							Another drop zone with its own settings
-						</div>
-					</div>
+					<!--<div nv-file-drop="" uploader="uploader" options="{ url: '/foo' }">-->
+						<!--<div nv-file-over="" uploader="uploader" over-class="file-drop-zone-over" class="file-drop-zone margin-bottom-20">-->
+							<!--Another drop zone with its own settings-->
+						<!--</div>-->
+					<!--</div>-->
 				</div>
 				<!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
 				Multiple
@@ -80,7 +37,7 @@
 				Single
 				<input type="file" nv-file-select="" uploader="uploader" />
 			</div>
-		</div>		
+		</div>
 		<!-- END: ACCORDION DEMO -->
 	</div>
 	<div class="col-md-8">
@@ -89,8 +46,8 @@
 			<div class="portlet-title">
 				<div class="caption font-green-sharp">
 					<i class="icon-settings font-green-sharp"></i>
-					<span class="caption-subject bold uppercase">Upload queue</span>
-					<span class="caption-helper">Queue length: {{ uploader.queue.length }}</span>
+					<span class="caption-subject bold uppercase">Chargement des Fichiers</span>
+					<span class="caption-helper">Nombre de fichiers: {{ uploader.queue.length }}</span>
 				</div>
 				<div class="actions">
 								<div class="btn-group">
@@ -127,16 +84,23 @@
 					<table class="table table-hover table-light">
 						<thead>
 							<tr class="uppercase">
-								<th width="50%">Name</th>
-								<th ng-show="uploader.isHTML5">Size</th>
-								<th ng-show="uploader.isHTML5">Progress</th>
-								<th>Status</th>
+								<th width="50%">Nom</th>
+								<th ng-show="uploader.isHTML5">Taille</th>
+								<th ng-show="uploader.isHTML5">Progression</th>
+								<th>Statut</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="item in uploader.queue">
-								<td><strong>{{ item.file.name }}</strong></td>
+								<!--<td><strong>{{ item.file.name }}</strong></td>-->
+								<td>
+									<strong>
+										<div class="popover-wrapper">
+											<a href="#" editable-text="item.file.name" class="popover-wrapper" >{{ item.file.name }}</a>
+										</div>
+									</strong>
+								</td>
 								<td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
 								<td ng-show="uploader.isHTML5">
 									<div class="progress progress-sm" style="margin-bottom: 0;">
@@ -150,13 +114,13 @@
 								</td>
 								<td nowrap>
 									<button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-									<span class="glyphicon glyphicon-upload"></span> Upload
+									<span class="glyphicon glyphicon-upload"></span> Charger
 									</button>
 									<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-									<span class="glyphicon glyphicon-ban-circle"></span> Cancel
+									<span class="glyphicon glyphicon-ban-circle"></span> Annuler
 									</button>
 									<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-									<span class="glyphicon glyphicon-trash"></span> Remove
+									<span class="glyphicon glyphicon-trash"></span> Supprimer
 									</button>
 								</td>
 							</tr>
@@ -165,22 +129,22 @@
 				</div>
 
 				<div>
-					<p>Queue progress:</p>
+					<p>Progression:</p>
 					<div class="progress progress-sm" style="">
 						<div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
 					</div>
 				</div>
 				<button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
-				<span class="glyphicon glyphicon-upload"></span> Upload all
+				<span class="glyphicon glyphicon-upload"></span> Charger tout
 				</button>
 				<button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
-				<span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+				<span class="glyphicon glyphicon-ban-circle"></span> Annuler tout
 				</button>
 				<button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
-				<span class="glyphicon glyphicon-trash"></span> Remove all
+				<span class="glyphicon glyphicon-trash"></span> Supprimer tout
 				</button>
 			</div>
-		</div>		
+		</div>
 		<!-- END: ACCORDION DEMO -->
 	</div>
 </div>

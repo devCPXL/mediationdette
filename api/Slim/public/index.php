@@ -25,7 +25,7 @@ require __DIR__ . '/../src/middleware.php';
 // Register routes
 require __DIR__ . '/../src/routes.php';
 
-global $database;
+global $database, $db_cpas_dev;
 $database = new medoo([
     // required
     'database_type' => 'mysql',
@@ -33,6 +33,27 @@ $database = new medoo([
     'server' => 'cpasxlnh',
     'username' => 'r_only',
     'password' => 'r_only',
+    'charset' => 'utf8',
+
+    // [optional]
+    'port' => 3306,
+
+    // [optional] Table prefix
+    'prefix' => '',
+
+    // driver_option for connection, read more from http://www.php.net/manual/en/pdo.setattribute.php
+    'option' => [
+        PDO::ATTR_CASE => PDO::CASE_NATURAL
+    ]
+]);
+
+$db_cpas_dev = new medoo([
+    // required
+    'database_type' => 'mysql',
+    'database_name' => 'cpas_dev',
+    'server' => 'cpasxldbtest',
+    'username' => 'root',
+    'password' => 'root',
     'charset' => 'utf8',
 
     // [optional]

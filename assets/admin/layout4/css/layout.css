@@ -75,8 +75,8 @@ Page Header
       display: block;
       float: left; }
     .page-header.navbar .page-logo .logo-default {
-      /*margin: 29px 10px 0 10px; */
-      margin: 17px 3px;
+      margin: 10px 0px 0 0px;
+      /*margin: 5px 3px;*/
     }
     .page-header.navbar .page-logo .logo-mini {
       display: none;
@@ -426,12 +426,14 @@ Page Header
       margin-left: 20px;
       margin-right: 10px; }
       .page-sidebar-closed.page-sidebar-closed-hide-logo .page-header.navbar .page-logo .logo-default {
-        display: none; }
+        /*display: none; */
+      }
     .page-header.navbar .search-form.search-form-expanded {
       width: 175px; }
       .page-header.navbar .search-form.search-form-expanded .input-group .form-control {
         text-indent: 0;
-        padding: 6px 12px; }
+        padding: 6px 12px;
+      }
         .page-header.navbar .search-form.search-form-expanded .input-group .form-control:hover {
           cursor: text; }
 

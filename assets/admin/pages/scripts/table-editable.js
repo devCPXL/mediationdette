@@ -1,82 +1,112 @@
 var TableEditable = function () {
 
-    var handleTable = function () {
+    var handleTable = function ($scope, Data) {
 
         function restoreRow(oTable, nRow) {
             var aData = oTable.fnGetData(nRow);
             var jqTds = $('>td', nRow);
 
-            for (var i = 0, iLen = jqTds.length; i < iLen; i++) {
-                oTable.fnUpdate(aData[i], nRow, i, false);
-            }
+            //for (var i = 0, iLen = jqTds.length; i < iLen; i++) {
+            //    oTable.fnUpdate(aData[i], nRow, i, false);
+            //}
+
+            oTable.fnUpdate(aData.name_creditor, nRow, 0, false);
+            oTable.fnUpdate(aData.address_creditor, nRow, 1, false);
+            oTable.fnUpdate(aData.zipcode_creditor, nRow, 3, false);
+            oTable.fnUpdate(aData.common_creditor, nRow, 2, false);
+            oTable.fnUpdate(aData.title_address_creditor, nRow, 4, false);
+            oTable.fnUpdate(aData.title_creditor, nRow, 5, false);
+            oTable.fnUpdate(aData.phone_creditor, nRow, 6, false);
+            oTable.fnUpdate(aData.email_creditor, nRow, 7, false);
 
             oTable.fnDraw();
         }
 
         function editRow(oTable, nRow) {
             var aData = oTable.fnGetData(nRow);
+
             var jqTds = $('>td', nRow);
-            jqTds[0].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[0] + '">';
-            jqTds[1].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[1] + '">';
-            jqTds[2].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[2] + '">';
-            jqTds[3].innerHTML = '<input type="text" class="form-control input-small" value="' + aData[3] + '">';
-            jqTds[4].innerHTML = '<a class="edit" href="">Save</a>';
-            jqTds[5].innerHTML = '<a class="cancel" href="">Cancel</a>';
+            jqTds[0].innerHTML = '<input type="text" class="form-control input-small" value="' + aData.name_creditor + '">';
+            jqTds[1].innerHTML = '<input type="text" class="form-control input-small" value="' + aData.address_creditor + '">';
+            jqTds[2].innerHTML = '<input type="text" class="form-control input-small" value="' + aData.zipcode_creditor + '">';
+            jqTds[3].innerHTML = '<input type="text" class="form-control input-small" value="' + aData.common_creditor + '">';
+
+            jqTds[4].innerHTML = '<input type="text" class="form-control input-small" value="' + aData.title_address_creditor + '">';
+            jqTds[5].innerHTML = '<input type="text" class="form-control input-small" value="' + aData.title_creditor + '">';
+            jqTds[6].innerHTML = '<input type="text" class="form-control input-small" value="' + aData.phone_creditor + '">';
+            jqTds[7].innerHTML = '<input type="text" class="form-control input-small" value="' + aData.email_creditor + '">';
+
+            jqTds[8].innerHTML = '<a class="edit" href="">Save</a>';
+            jqTds[9].innerHTML = '<a class="cancel" href="">Cancel</a>';
         }
 
         function saveRow(oTable, nRow) {
             var jqInputs = $('input', nRow);
+            var aData = oTable.fnGetData(nRow);
+            Data.put('creditor/', aData).then(function(data){
+                console.log(data);
+            });
             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
             oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
             oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
             oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 4, false);
-            oTable.fnUpdate('<a class="delete" href="">Delete</a>', nRow, 5, false);
+            oTable.fnUpdate(jqInputs[4].value, nRow, 4, false);
+            oTable.fnUpdate(jqInputs[5].value, nRow, 5, false);
+            oTable.fnUpdate(jqInputs[6].value, nRow, 6, false);
+            oTable.fnUpdate(jqInputs[7].value, nRow, 7, false);
+            oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 8, false);
+            oTable.fnUpdate('<a class="delete" href="">Supprimer</a>', nRow, 9, false);
             oTable.fnDraw();
         }
 
         function cancelEditRow(oTable, nRow) {
             var jqInputs = $('input', nRow);
-            oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-            oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
-            oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
-            oTable.fnUpdate(jqInputs[3].value, nRow, 3, false);
-            oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 4, false);
+            oTable.fnUpdate(jqInputs.name_creditor.value, nRow, 0, false);
+            oTable.fnUpdate(jqInputs.address_creditor.value, nRow, 1, false);
+            oTable.fnUpdate(jqInputs.zipcode_creditor.value, nRow, 2, false);
+            oTable.fnUpdate(jqInputs.common_creditor.value, nRow, 3, false);
+            oTable.fnUpdate(jqInputs.title_address_creditor.value, nRow, 4, false);
+            oTable.fnUpdate(jqInputs.title_creditor.value, nRow, 5, false);
+            oTable.fnUpdate(jqInputs.phone_creditor.value, nRow, 6, false);
+            oTable.fnUpdate(jqInputs.email_creditor.value, nRow, 7, false);
+            oTable.fnUpdate('<a class="edit" href="">Editer</a>', nRow, 8, false);
             oTable.fnDraw();
         }
+
+
 
         var table = $('#sample_editable_1');
 
         var oTable = table.dataTable({
-
-            // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js). 
-            // So when dropdowns used the scrollable div should be removed. 
-            //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
-
+            "ajax": "//webtest/mediationdetteTest/api/Slim/public/creditors/",
             "lengthMenu": [
                 [5, 15, 20, -1],
-                [5, 15, 20, "All"] // change per page values here
+                [5, 15, 20, "tout"] // change per page values here
             ],
-
-            // Or you can use remote translation file
-            //"language": {
-            //   url: '//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Portuguese.json'
-            //},
-
-            // set the initial value
-            "pageLength": 10,
-
             "language": {
-                "lengthMenu": " _MENU_ records"
+               url: '//webtest/mediationdetteTest/assets/global/plugins/datatables/plugins/i18n/French.json'
             },
-            "columnDefs": [{ // set default column settings
-                'orderable': true,
-                'targets': [0]
-            }, {
-                "searchable": true,
-                "targets": [0]
-            }],
+            "pageLength": 5,
+            columns: [
+                { data:"name_creditor"},
+                { data:"address_creditor"},
+                { data:"zipcode_creditor" },
+                { data:"common_creditor" },
+                { data:"title_address_creditor" },
+                { data:"title_creditor" },
+                { data:"phone_creditor" },
+                { data:"email_creditor" },
+                { data: null, render: function ( data, type, row ) {
+                        return "<a class='edit' href=''>Editer</a>"; }},
+                { data: null, render: function ( data, type, row ) {
+                        return "<a class='delete' href=''>Supprimer</a>";}}
+            ],
+            //    'orderable': true,
+            //    'targets': [0]
+            //}, {
+            //    "searchable": true,
+            //    "targets": [0]
+            //}],
             "order": [
                 [0, "asc"]
             ] // set first column as a default sort by asc
@@ -120,13 +150,13 @@ var TableEditable = function () {
         table.on('click', '.delete', function (e) {
             e.preventDefault();
 
-            if (confirm("Are you sure to delete this row ?") == false) {
+            if (confirm("Voulez vous vraiment supprimer cet enregistrement ?") == false) {
                 return;
             }
 
             var nRow = $(this).parents('tr')[0];
             oTable.fnDeleteRow(nRow);
-            alert("Deleted! Do not forget to do some ajax to sync with backend :)");
+            //alert("Deleted! Do not forget to do some ajax to sync with backend :)");
         });
 
         table.on('click', '.cancel', function (e) {
@@ -156,7 +186,7 @@ var TableEditable = function () {
                 /* Editing this row and want to save it */
                 saveRow(oTable, nEditing);
                 nEditing = null;
-                alert("Updated! Do not forget to do some ajax to sync with backend :)");
+                //alert("Updated! Do not forget to do some ajax to sync with backend :)");
             } else {
                 /* No edit in progress - let's start one */
                 editRow(oTable, nRow);
@@ -168,8 +198,8 @@ var TableEditable = function () {
     return {
 
         //main function to initiate the module
-        init: function () {
-            handleTable();
+        init: function ($scope, Data) {
+            handleTable($scope, Data);
         }
 
     };

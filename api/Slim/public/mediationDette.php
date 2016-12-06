@@ -39,3 +39,26 @@ $app->get('/listDossier/', function ($request, $response, $args) {
         ");
     return $response->withStatus(200)->withHeader('Content-type', 'application/json')->write(json_encode($data));
 });
+
+
+/** creditors */
+
+$app->get('/creditors/', function ($request, $response, $args) {
+    global $db_cpas_dev;
+
+//join between the person and the Mazout folder
+    $data = $db_cpas_dev->query1("select * from social_creditor ");
+    return $response->withStatus(200)->withHeader('Content-type', 'application/json')->write(json_encode($data));
+});
+
+$app->put('/creditor/', function ($request, $response, $args) {
+    global $db_cpas_dev;
+
+    $aData = (object) $request->getParsedBody();
+//    $id_creditor = $aData->id_creditor;
+//    unset($aData->id_creditor);
+
+    $last_user_id = $db_cpas_dev->update("social_creditor", (array)$aData,  ["id_creditor[=]" => $aData->id_creditor ]);
+
+    return $response->withStatus(200)->withHeader('Content-type', 'application/json')->write(json_encode($last_user_id));
+});

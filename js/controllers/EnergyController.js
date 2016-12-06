@@ -147,22 +147,6 @@ MetronicApp.controller('ExtraMazoutController', function($scope, $http, $timeout
 });
 
 
-MetronicApp.controller('UploadFilesController', function($scope, $http, $timeout, Data, $window) {
-    //$scope.personselected = {};
-    $scope.$on('$viewContentLoaded', function() {
-        Metronic.initAjax(); // initialize core components
-
-    });
-    //console.log(TableAdvanced.initTable1);
-
-    $scope.people = {};
-    Data.get('listMazout/').then(function(data){
-        $scope.people = data.data;
-        //console.log(data);
-    });
-
-});
-
 MetronicApp.controller('ExtraRapportJournalierController', function($scope, $http, $timeout, Data, $window) {
     console.log('ExtraRapportJournalierController');
 
